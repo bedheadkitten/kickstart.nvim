@@ -829,25 +829,29 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    --    'folke/tokyonight.nvim',
-    'Mofiqul/dracula.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+  -- colorschemes
+  --   'Mofiqul/dracula.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   config = function()
+  --     require('dracula').setup {
+  --       transparent_bg = true,
+  --       italics_comment = false,
+  --       colors = {
+  --         selection = '#000000',
+  --       },
+  --     }
+  --     vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
+  --   end,
+  -- },
+  {
+    'sainnhe/everforest',
+    lazy = false,
+    priority = 1000,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('dracula').setup {
-        transparent_bg = true,
-        italics_comment = false,
-        lualine_bg_color = '#44475a',
-        colors = {
-          selection = '#000000',
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
+      vim.g.everforest_transparent_background = 1
+      vim.g.everforest_background = 'soft'
+      vim.g.everforest_enable_italic = true
+      vim.cmd.colorscheme 'everforest'
     end,
   },
   -- {
@@ -859,9 +863,49 @@ require('lazy').setup({
   --       commentStyle = { italic = true },
   --       keywordStyle = { italic = true },
   --     }
-  --     vim.cmd.colorscheme 'kanagawa-lotus'
+  --     vim.cmd.colorscheme 'kanagawa'
   --   end,
   -- },
+  --
+  -- {
+  --   'scottmckendry/cyberdream.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('cyberdream').setup {
+  --       transparent = true,
+  --     }
+  --     vim.cmd 'colorscheme cyberdream'
+  --   end,
+  -- },
+  -- {
+  --   'rose-pine/neovim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('rose-pine').setup {
+  --       variant = 'main',
+  --       styles = {
+  --         bold = true,
+  --         italic = true,
+  --         transparency = true,
+  --       },
+  --     }
+  --     vim.cmd 'colorscheme rose-pine'
+  --   end,
+  -- },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('onedark').setup {
+        style = 'dark',
+        transparent = true,
+      }
+      -- Enable theme
+      require('onedark').load()
+    end,
+  },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
