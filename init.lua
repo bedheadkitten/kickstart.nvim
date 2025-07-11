@@ -3,7 +3,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 ---------------- Div ------------------------
--- highlight clolumn
+-- highlight column
 vim.opt.colorcolumn = '80'
 vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5'
 
@@ -838,6 +838,10 @@ require('lazy').setup({
       require('dracula').setup {
         transparent_bg = true,
         italics_comment = false,
+        lualine_bg_color = '#44475a',
+        colors = {
+          selection = '#000000',
+        },
       }
 
       -- Load the colorscheme here.
