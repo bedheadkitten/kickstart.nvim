@@ -843,17 +843,17 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
   --   end,
   -- },
-  {
-    'sainnhe/everforest',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.g.everforest_transparent_background = 1
-      vim.g.everforest_background = 'soft'
-      vim.g.everforest_enable_italic = true
-      vim.cmd.colorscheme 'everforest'
-    end,
-  },
+  -- {
+  --   'sainnhe/everforest',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.everforest_transparent_background = 1
+  --     vim.g.everforest_background = 'soft'
+  --     vim.g.everforest_enable_italic = true
+  --     vim.cmd.colorscheme 'everforest'
+  --   end,
+  -- },
   -- {
   --   'rebelot/kanagawa.nvim',
   --   priority = 1000,
@@ -896,7 +896,7 @@ require('lazy').setup({
   -- },
   {
     'navarasu/onedark.nvim',
-    priority = 1000, -- make sure to load this before all the other start plugins
+    priority = 1000,
     config = function()
       require('onedark').setup {
         style = 'dark',
