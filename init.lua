@@ -4,8 +4,9 @@ vim.g.maplocalleader = ' '
 
 ---------------- Div ------------------------
 -- highlight column
-vim.opt.colorcolumn = '80'
-vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5'
+vim.opt.colorcolumn = '100'
+-- vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5'
+vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b0737a'
 
 ---------------------------------------------
 
@@ -472,7 +473,7 @@ require('lazy').setup({
         callback = function(event)
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
-          --
+
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc, mode)
@@ -626,7 +627,43 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        pylsp = {},
+        pylsp = { --FIX: I cant get this to work why????
+          settings = {
+            pycodestyle = { maxLineLength = 120 }, -- this dosent work for some reason
+          },
+
+          --   settings = {
+          --     pylsp = {
+          --       plugins = {
+          --         autopep8 = { enabled = false },
+          --         yapf = { enabled = true },
+          --         pycodestyle = { enabled = true, maxLineLength = 100 },
+          --
+          --         -- flake8 = { enabled = true, maxLineLength = 100 },
+          --         -- ruff = {
+          --         --   enabled = true, -- Enable the plugin
+          --         --   formatEnabled = true, -- Enable formatting using ruffs formatter
+          --         --   extendSelect = { 'I' }, -- Rules that are additionally used by ruff
+          --         --   extendIgnore = { 'C90' }, -- Rules that are additionally ignored by ruff
+          --         --   format = { 'I' }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
+          --         --   severities = { ['D212'] = 'I' }, -- Optional table of rules where a custom severity is desired
+          --         --   unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
+          --         --
+          --         --   -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
+          --         --   lineLength = 88, -- Line length to pass to ruff checking and formatting
+          --         --   exclude = { '__about__.py' }, -- Files to be excluded by ruff checking
+          --         --   select = { 'F' }, -- Rules to be enabled by ruff
+          --         --   ignore = { 'D210' }, -- Rules to be ignored by ruff
+          --         --   perFileIgnores = { ['__init__.py'] = 'CPY001' }, -- Rules that should be ignored for specific files
+          --         --   preview = false, -- Whether to enable the preview style linting and formatting.
+          --         --   targetVersion = 'py310', -- The minimum python version to target (applies for both linting and formatting).
+          --         -- },
+          --       },
+          --     },
+          --   },
+        },
+        -- ruff = {},
+        mypy = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -789,6 +826,8 @@ require('lazy').setup({
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<C-n>'] = { 'select_next', 'fallback' },
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -829,73 +868,97 @@ require('lazy').setup({
     },
   },
 
-  -- colorschemes
-  --   'Mofiqul/dracula.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   config = function()
-  --     require('dracula').setup {
-  --       transparent_bg = true,
-  --       italics_comment = false,
-  --       colors = {
-  --         selection = '#000000',
-  --       },
-  --     }
-  --     vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
-  --   end,
-  -- },
-  -- {
-  --   'sainnhe/everforest',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.g.everforest_transparent_background = 1
-  --     vim.g.everforest_background = 'soft'
-  --     vim.g.everforest_enable_italic = true
-  --     vim.cmd.colorscheme 'everforest'
-  --   end,
-  -- },
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     require('kanagawa').setup {
-  --       transparent = true,
-  --       commentStyle = { italic = true },
-  --       keywordStyle = { italic = true },
-  --     }
-  --     vim.cmd.colorscheme 'kanagawa'
-  --   end,
-  -- },
-  --
-  -- {
-  --   'scottmckendry/cyberdream.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require('cyberdream').setup {
-  --       transparent = true,
-  --     }
-  --     vim.cmd 'colorscheme cyberdream'
-  --   end,
-  -- },
-  -- {
-  --   'rose-pine/neovim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require('rose-pine').setup {
-  --       variant = 'main',
-  --       styles = {
-  --         bold = true,
-  --         italic = true,
-  --         transparency = true,
-  --       },
-  --     }
-  --     vim.cmd 'colorscheme rose-pine'
-  --   end,
-  -- },
+  --NOTE: colorschemes
+
+  {
+    'catppuccin/nvim',
+    lazy = true,
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catpuccin').setup {
+        transparent_background = true,
+      }
+      vim.cmd.colorcheme ' catpuccin'
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    lazy = true,
+    priority = 1000,
+    opts = {
+      transparent = true,
+    },
+  },
+  {
+    'Mofiqul/dracula.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('dracula').setup {
+        transparent_bg = true,
+        italics_comment = false,
+        colors = {
+          selection = '#000000',
+        },
+      }
+      vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
+    end,
+  },
+  {
+    'sainnhe/everforest',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.g.everforest_transparent_background = 1
+      vim.g.everforest_background = 'soft'
+      vim.g.everforest_enable_italic = true
+      vim.cmd.colorscheme 'everforest'
+    end,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('kanagawa').setup {
+        transparent = true,
+        commentStyle = { italic = true },
+        keywordStyle = { italic = true },
+      }
+      vim.cmd.colorscheme 'kanagawa'
+    end,
+  },
+  {
+    'scottmckendry/cyberdream.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('cyberdream').setup {
+        transparent = true,
+      }
+      vim.cmd 'colorscheme cyberdream'
+    end,
+  },
+  {
+    'rose-pine/neovim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('rose-pine').setup {
+        variant = 'main',
+        styles = {
+          bold = true,
+          italic = true,
+          transparency = true,
+        },
+      }
+      vim.cmd 'colorscheme rose-pine'
+    end,
+  },
   {
     'navarasu/onedark.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
       require('onedark').setup {
