@@ -5,8 +5,8 @@ vim.g.maplocalleader = ' '
 ---------------- Div ------------------------
 -- highlight column
 vim.opt.colorcolumn = '100'
--- vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5'
-vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b0737a'
+-- vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5 pink, #b0737a peach'
+vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#333333'
 
 ---------------------------------------------
 
@@ -190,6 +190,7 @@ require('lazy').setup({
       require('oil').open()
     end),
   },
+  { 'vimwiki/vimwiki' },
 
   --------------------------------------
 
@@ -210,9 +211,6 @@ require('lazy').setup({
   --            })
   --        end,
   --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -627,41 +625,21 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        pylsp = { --FIX: I cant get this to work why????
-          settings = {
-            pycodestyle = { maxLineLength = 120 }, -- this dosent work for some reason
-          },
-
-          --   settings = {
-          --     pylsp = {
-          --       plugins = {
-          --         autopep8 = { enabled = false },
-          --         yapf = { enabled = true },
-          --         pycodestyle = { enabled = true, maxLineLength = 100 },
-          --
-          --         -- flake8 = { enabled = true, maxLineLength = 100 },
-          --         -- ruff = {
-          --         --   enabled = true, -- Enable the plugin
-          --         --   formatEnabled = true, -- Enable formatting using ruffs formatter
-          --         --   extendSelect = { 'I' }, -- Rules that are additionally used by ruff
-          --         --   extendIgnore = { 'C90' }, -- Rules that are additionally ignored by ruff
-          --         --   format = { 'I' }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
-          --         --   severities = { ['D212'] = 'I' }, -- Optional table of rules where a custom severity is desired
-          --         --   unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
-          --         --
-          --         --   -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
-          --         --   lineLength = 88, -- Line length to pass to ruff checking and formatting
-          --         --   exclude = { '__about__.py' }, -- Files to be excluded by ruff checking
-          --         --   select = { 'F' }, -- Rules to be enabled by ruff
-          --         --   ignore = { 'D210' }, -- Rules to be ignored by ruff
-          --         --   perFileIgnores = { ['__init__.py'] = 'CPY001' }, -- Rules that should be ignored for specific files
-          --         --   preview = false, -- Whether to enable the preview style linting and formatting.
-          --         --   targetVersion = 'py310', -- The minimum python version to target (applies for both linting and formatting).
-          --         -- },
-          --       },
-          --     },
-          --   },
+        pylsp = { -- Halleluja!!!! RTFM :help lspconfig-all !!
+          vim.lsp.config('pylsp', {
+            settings = {
+              pylsp = {
+                plugins = {
+                  pycodestyle = {
+                    ignore = { 'W391' },
+                    maxLineLength = 100,
+                  }, -- this dosent work for some reason
+                },
+              },
+            },
+          }),
         },
+
         -- ruff = {},
         mypy = {},
         -- rust_analyzer = {},
