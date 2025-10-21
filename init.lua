@@ -324,25 +324,6 @@ require('lazy').setup({
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
-      -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
-      -- many different aspects of Neovim, your workspace, LSP, and more!
-      --
-      -- The easiest way to use Telescope, is to start by doing something like:
-      --  :Telescope help_tags
-      --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
-      --
-      -- Two important keymaps to use while in Telescope are:
-      --  - Insert mode: <c-/>
-      --  - Normal mode: ?
-      --
-      -- This opens a window that shows you all of the keymaps for the current
-      -- Telescope picker. This is really useful to discover what Telescope can
-      -- do as well as how to actually do it!
-
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -857,7 +838,7 @@ require('lazy').setup({
       require('catpuccin').setup {
         transparent_background = true,
       }
-      vim.cmd.colorcheme ' catpuccin'
+      vim.cmd.colorcheme 'catpuccin'
     end,
   },
   {
@@ -915,7 +896,7 @@ require('lazy').setup({
       require('cyberdream').setup {
         transparent = true,
       }
-      vim.cmd 'colorscheme cyberdream'
+      vim.cmd.colorscheme 'cyberdream'
     end,
   },
   {
@@ -924,14 +905,14 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       require('rose-pine').setup {
-        variant = 'main',
+        variant = 'moon',
         styles = {
-          bold = true,
-          italic = true,
+          bold = false,
+          italic = false,
           transparency = true,
         },
       }
-      vim.cmd 'colorscheme rose-pine'
+      vim.cmd.colorscheme 'rose-pine'
     end,
   },
   {
@@ -944,10 +925,10 @@ require('lazy').setup({
         transparent = true,
       }
       -- Enable theme
-      require('onedark').load()
+      -- require('onedark').load()
+      vim.cmd.colorscheme 'onedark'
     end,
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -1061,6 +1042,12 @@ require('lazy').setup({
     },
   },
 })
+
+--NOTE: load the active colorscheme
+local active_colorscheme = 'rose-pine'
+if active_colorscheme then
+  vim.cmd.colorscheme(active_colorscheme)
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
