@@ -845,9 +845,13 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     lazy = true,
     priority = 1000,
-    opts = {
-      transparent = true,
-    },
+    config = function()
+      require('tokyonight').setup {
+        transparent = true,
+        style = 'moon',
+      }
+      vim.cmd.colorscheme 'tokyonight'
+    end,
   },
   {
     'Mofiqul/dracula.nvim',
@@ -861,7 +865,7 @@ require('lazy').setup({
           selection = '#000000',
         },
       }
-      vim.cmd.colorscheme 'dracula-soft' -- tokyonight-night
+      vim.cmd.colorscheme 'dracula-soft'
     end,
   },
   {
@@ -873,6 +877,17 @@ require('lazy').setup({
       vim.g.everforest_background = 'soft'
       vim.g.everforest_enable_italic = true
       vim.cmd.colorscheme 'everforest'
+    end,
+  },
+  {
+    'sainnhe/edge',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.g.edge_enable_italic = false
+      vim.g.edge_style = 'aura'
+      vim.g.edge_transparent_background = true
+      vim.cmd.colorscheme 'edge'
     end,
   },
   {
@@ -924,9 +939,22 @@ require('lazy').setup({
         style = 'dark',
         transparent = true,
       }
-      -- Enable theme
-      -- require('onedark').load()
       vim.cmd.colorscheme 'onedark'
+    end,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('nightfox').setup {
+        options = {
+          transparent = true,
+        },
+      }
+      -- vim.cmd.colorscheme 'carbonfox'
+      -- other alternatives:
+      -- nightfox, carbonfox, dayfox, dawnfox, nordfox, duskfox, terafox
     end,
   },
   -- Highlight todo, notes, etc in comments
@@ -1044,7 +1072,7 @@ require('lazy').setup({
 })
 
 --NOTE: load the active colorscheme
-local active_colorscheme = 'rose-pine'
+local active_colorscheme = 'nordfox'
 if active_colorscheme then
   vim.cmd.colorscheme(active_colorscheme)
 end
