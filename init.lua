@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 -- highlight column
 vim.opt.colorcolumn = '100'
 -- vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#b76ab5 pink, #b0737a peach'
-vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#333333'
+vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#7A5770'
 
 ---------------------------------------------
 
@@ -61,7 +61,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -838,7 +838,6 @@ require('lazy').setup({
       require('catpuccin').setup {
         transparent_background = true,
       }
-      vim.cmd.colorcheme 'catpuccin'
     end,
   },
   {
@@ -850,7 +849,6 @@ require('lazy').setup({
         transparent = true,
         style = 'moon',
       }
-      vim.cmd.colorscheme 'tokyonight'
     end,
   },
   {
@@ -865,7 +863,6 @@ require('lazy').setup({
           selection = '#000000',
         },
       }
-      vim.cmd.colorscheme 'dracula-soft'
     end,
   },
   {
@@ -876,7 +873,6 @@ require('lazy').setup({
       vim.g.everforest_transparent_background = 1
       vim.g.everforest_background = 'soft'
       vim.g.everforest_enable_italic = true
-      vim.cmd.colorscheme 'everforest'
     end,
   },
   {
@@ -887,7 +883,6 @@ require('lazy').setup({
       vim.g.edge_enable_italic = false
       vim.g.edge_style = 'aura'
       vim.g.edge_transparent_background = true
-      vim.cmd.colorscheme 'edge'
     end,
   },
   {
@@ -900,7 +895,6 @@ require('lazy').setup({
         commentStyle = { italic = true },
         keywordStyle = { italic = true },
       }
-      vim.cmd.colorscheme 'kanagawa'
     end,
   },
   {
@@ -911,7 +905,6 @@ require('lazy').setup({
       require('cyberdream').setup {
         transparent = true,
       }
-      vim.cmd.colorscheme 'cyberdream'
     end,
   },
   {
@@ -927,7 +920,6 @@ require('lazy').setup({
           transparency = true,
         },
       }
-      vim.cmd.colorscheme 'rose-pine'
     end,
   },
   {
@@ -939,7 +931,6 @@ require('lazy').setup({
         style = 'dark',
         transparent = true,
       }
-      vim.cmd.colorscheme 'onedark'
     end,
   },
   {
@@ -947,14 +938,11 @@ require('lazy').setup({
     lazy = true,
     priority = 1000,
     config = function()
-      require('nightfox').setup {
+      require('nightfox').setup { -- nightfox, carbonfox, dayfox, dawnfox, nordfox, duskfox, terafox
         options = {
           transparent = true,
         },
       }
-      -- vim.cmd.colorscheme 'carbonfox'
-      -- other alternatives:
-      -- nightfox, carbonfox, dayfox, dawnfox, nordfox, duskfox, terafox
     end,
   },
   -- Highlight todo, notes, etc in comments
