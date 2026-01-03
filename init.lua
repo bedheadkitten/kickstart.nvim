@@ -144,7 +144,23 @@ require('lazy').setup({
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = {
+      render_modes = true,
+      heading = { border = true, border_virtual = true },
+      quote = { repeat_linebreak = true },
+      checkbox = {
+        enabled = true,
+        unchecked = { icon = ' ' },
+        checked = { icon = '󰄳 ' },
+        custom = {
+          todo = { rendered = '󰓏 ' },
+          important = { raw = '[~]', rendered = ' ' },
+        },
+      },
+      code = { style = 'language' },
+      dash = { icon = '' },
+      bullet = { enabled = true, icons = { ' ' } }, --, ' ', '◆', '◇' } },
+    },
   },
   {
     'akinsho/toggleterm.nvim',
@@ -190,7 +206,6 @@ require('lazy').setup({
       require('oil').open()
     end),
   },
-  { 'vimwiki/vimwiki' },
 
   --------------------------------------
 
@@ -614,7 +629,7 @@ require('lazy').setup({
                   pycodestyle = {
                     ignore = { 'W391' },
                     maxLineLength = 100,
-                  }, -- this dosent work for some reason
+                  },
                 },
               },
             },
@@ -924,7 +939,7 @@ require('lazy').setup({
   },
   {
     'navarasu/onedark.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       require('onedark').setup {
