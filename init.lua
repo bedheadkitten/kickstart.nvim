@@ -138,6 +138,8 @@ require('lazy').setup({
 
   ------------------- DIV -------------------
   {
+    -- I dont like it, i want only different colors on the headings and bullets etc
+    -- maybe some links should be viewed as links
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
@@ -145,11 +147,19 @@ require('lazy').setup({
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
-      render_modes = true,
-      heading = { border = true, border_virtual = true },
+      -- i dont like any of the rendering but i can now get different headings so i got that going for me
+      render_modes = false,
+      heading = {
+        enabled = false,
+        width = 'block',
+        left_pad = 2,
+        right_pad = 4,
+        border = true,
+        border_virtual = true,
+      },
       quote = { repeat_linebreak = true },
       checkbox = {
-        enabled = true,
+        enabled = false,
         unchecked = { icon = ' ' },
         checked = { icon = '󰄳 ' },
         custom = {
@@ -159,7 +169,7 @@ require('lazy').setup({
       },
       code = { style = 'language' },
       dash = { icon = '' },
-      bullet = { enabled = true, icons = { ' ' } }, --, ' ', '◆', '◇' } },
+      bullet = { enabled = false, icons = { ' ' } }, --, ' ', '◆', '◇' } },
     },
   },
   {
@@ -618,6 +628,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         markdown_oxide = {},
+        -- marksman = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -1078,6 +1089,21 @@ require('lazy').setup({
 local active_colorscheme = 'nordfox'
 if active_colorscheme then
   vim.cmd.colorscheme(active_colorscheme)
+
+  -- just making some of the headings colorful as the nightfoxes dosent have it
+  if active_colorscheme == 'nordfox' then
+    -- define highlight groups
+    vim.api.nvim_set_hl(0, 'MarkdownHeading1', { fg = '#81A1C1', bold = true })
+    vim.api.nvim_set_hl(0, 'MarkdownHeading2', { fg = '#BF87C8', bold = true })
+    vim.api.nvim_set_hl(0, 'MarkdownHeading3', { fg = '#BF616A', bold = true })
+    vim.api.nvim_set_hl(0, 'MarkdownHeading4', { fg = '#EBCB8B', bold = true })
+
+    -- link Tree-sitter captures to those groups (use the exact capture names you observed)
+    vim.cmd 'hi! link @markup.heading.1 MarkdownHeading1'
+    vim.cmd 'hi! link @markup.heading.2 MarkdownHeading2'
+    vim.cmd 'hi! link @markup.heading.3 MarkdownHeading3'
+    vim.cmd 'hi! link @markup.heading.4 MarkdownHeading4'
+  end
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
