@@ -82,6 +82,9 @@ vim.keymap.set('n', '<leader>O', 'O<Esc>')
 -- last buffer swithcg
 vim.keymap.set('n', '<leader>bb', '<cmd>b#<CR>')
 
+-- open oil in current buff
+vim.keymap.set('n', '<leader>e', '<cmd>e .<CR>')
+
 -----------------------------------
 
 -- Clear highlights on search when pressing <Esc> in normal mode
