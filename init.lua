@@ -6,9 +6,9 @@ vim.g.have_nerd_font = false
 
 --NOTE: options
 vim.o.colorcolumn = '100'
-vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#7A5770'
+vim.cmd 'autocmd ColorScheme * highlight ColorColumn ctermbg=lightgray guibg=#EBCB8B'
 vim.o.cursorline = false
-vim.o.scrolloff = 10
+vim.o.scrolloff = 5
 
 vim.o.number = true
 vim.o.relativenumber = true
@@ -39,7 +39,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>o', 'o<Esc>')
 vim.keymap.set('n', '<leader>O', 'O<Esc>')
 vim.keymap.set('n', '<leader>bb', '<cmd>b#<CR>')
+vim.keymap.set('n', '<leader>bo', 'I# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-<CR># -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-<Esc>O# ')
 vim.keymap.set('n', '<leader>e', '<cmd>e .<CR>')
+vim.keymap.set('n', '<leader>å', ':Telescope workspaces<CR>', { noremap = true, silent = true })
 
 --NOTE: Diagnostic Config & Keymaps
 vim.diagnostic.config {
@@ -111,6 +113,20 @@ require('lazy').setup({
         delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
         topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
         changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
+      },
+    },
+  },
+  {
+    'natecraddock/workspaces.nvim',
+    lazy = false,
+    opts = {
+      path = vim.fn.stdpath 'data' .. '/workspaces',
+      hooks = {
+        add = {},
+        remove = {},
+        rename = {},
+        open_pre = {},
+        open = { 'Oil' },
       },
     },
   },
@@ -253,6 +269,12 @@ require('lazy').setup({
         -- },
         -- pickers = {}
         extensions = {
+          workspaces = {
+            -- keep insert mode after selection in the picker, default is false
+            keep_insert = false,
+            -- Highlight group used for the path in the picker, default is "String"
+            path_hl = 'String',
+          },
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
         },
       }
