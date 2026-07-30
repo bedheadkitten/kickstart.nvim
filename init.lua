@@ -461,6 +461,14 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
+        ols = {
+          cmd = { '/home/idaa/.local/share/nvim/mason/packages/ols/ols-x86_64-unknown-linux-gnu' },
+          mason = false,
+          filetypes = { 'odin' },
+          settings = {
+            odin_command = '/home/idaa/source_lang/Odin/odin',
+          },
+        },
         markdown_oxide = {},
         pylsp = { -- Halleluja!!!! RTFM :help lspconfig-all !!
           vim.lsp.config('pylsp', {
@@ -558,8 +566,16 @@ require('lazy').setup({
           }
         end
       end,
+      formatters = {
+        odinfmt = {
+          command = 'odinfmt',
+          args = { '-stdin' },
+          stdin = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        odin = { 'odinfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
